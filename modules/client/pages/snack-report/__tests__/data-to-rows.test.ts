@@ -19,12 +19,14 @@ describe("SnackReport.dataToRows", () => {
         {
           id: 1,
           name: "Nom #1",
-          voteCount: 4
+          voteCount: 4,
+          tags: ["yummy", "good"]
         },
         {
           id: 2,
           name: "Nom #2",
-          voteCount: 3
+          voteCount: 3,
+          tags: ["pure"]
         }
       ]
     };
@@ -34,13 +36,13 @@ describe("SnackReport.dataToRows", () => {
         place: 1,
         snack: "Nom #1",
         votes: 4,
-        tags: []
+        tags: ["yummy", "good"]
       },
       {
         place: 2,
         snack: "Nom #2",
         votes: 3,
-        tags: []
+        tags: ["pure"]
       }
     ];
 

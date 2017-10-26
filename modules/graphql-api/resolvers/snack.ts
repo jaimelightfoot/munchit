@@ -16,5 +16,12 @@ export const SnackResolvers = {
 
   async voteCount(snack: MinimalSnack, args: {}, context: Context) {
     return await context.voteRepository.countForSnack.load(snack.id);
+  },
+
+  async tags(snack: MinimalSnack, args: {}, context: Context) {
+    const taggings = await context.taggingRepository.forSnack.load(snack.id);
+    const tags = await context.tagRepository.forTagging.loadMany(taggings);
+
+    return tags.map(t => t.name);
   }
 };
