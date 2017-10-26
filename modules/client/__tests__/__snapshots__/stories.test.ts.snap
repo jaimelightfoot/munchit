@@ -288,25 +288,7 @@ exports[`Storyshots Page – Snack Report Empty table example 1`] = `
 <div
   className="snack-report"
 >
-  <table>
-    <thead>
-      <tr>
-        <th>
-          Place
-        </th>
-        <th>
-          Votes
-        </th>
-        <th>
-          Snack
-        </th>
-        <th>
-          Tags
-        </th>
-      </tr>
-    </thead>
-    <tbody />
-  </table>
+  No snacks to show :(
 </div>
 `;
 
