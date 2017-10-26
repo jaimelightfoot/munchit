@@ -310,6 +310,14 @@ exports[`Storyshots Page – Snack Report Empty table example 1`] = `
 </div>
 `;
 
+exports[`Storyshots Page – Snack Report Loading state 1`] = `
+<div
+  className="snack-report"
+>
+  Loading...
+</div>
+`;
+
 exports[`Storyshots Page – Snack Report Two rows example 1`] = `
 <div
   className="snack-report"

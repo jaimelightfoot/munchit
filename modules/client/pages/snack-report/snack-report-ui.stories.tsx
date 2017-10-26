@@ -4,6 +4,7 @@ import { SnackReportUI } from "./snack-report-ui";
 
 storiesOf("Page – Snack Report", module)
   .add("Empty table example", () => <SnackReportUI rows={[]} />)
+  .add("Loading state", () => <SnackReportUI rows={null} />)
   .add("Two rows example", () => (
     <SnackReportUI
       rows={[
