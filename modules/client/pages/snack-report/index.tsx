@@ -7,11 +7,11 @@ import { SnackReportQuery } from "client/graphql-types";
 import { graphql } from "react-apollo";
 
 export function dataToRows(data: SnackReportQuery): SnackReportRow[] {
-  if (!data.allSnacks) {
+  if (!data.topSnacks) {
     return [];
   }
 
-  return data.allSnacks.map((row, index) => ({
+  return data.topSnacks.map((row, index) => ({
     place: index + 1,
     snack: row.name,
     votes: row.voteCount,

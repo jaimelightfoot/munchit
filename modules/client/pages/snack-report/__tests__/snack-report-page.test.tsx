@@ -21,7 +21,7 @@ describe("Snack report page", () => {
     const Provider = mockProvider({
       mocks: {
         Query: () => ({
-          allSnacks: () => []
+          topSnacks: () => []
         })
       }
     });
@@ -41,7 +41,7 @@ describe("Snack report page", () => {
     const Provider = mockProvider({
       mocks: {
         Query: () => ({
-          allSnacks: () => [
+          topSnacks: () => [
             { id: 1, name: "Kiwis", voteCount: 1 },
             { id: 2, name: "Those cool koala things", voteCount: 2 }
           ]

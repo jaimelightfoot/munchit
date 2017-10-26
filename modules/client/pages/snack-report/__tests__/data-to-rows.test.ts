@@ -5,7 +5,7 @@ import { dataToRows } from "client/pages/snack-report/index";
 describe("SnackReport.dataToRows", () => {
   it("handles a failed lookup", () => {
     const query: SnackReportQuery = {
-      allSnacks: null
+      topSnacks: null
     };
     const expected: SnackReportRow[] = [];
 
@@ -15,7 +15,7 @@ describe("SnackReport.dataToRows", () => {
 
   it("returns data with valid place", () => {
     const query: SnackReportQuery = {
-      allSnacks: [
+      topSnacks: [
         {
           id: 1,
           name: "Nom #1",
