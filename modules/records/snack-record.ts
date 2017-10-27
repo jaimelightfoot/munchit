@@ -14,4 +14,43 @@ export interface SavedSnack extends UnsavedSnack {
 export class SnackRepository extends RepositoryBase(SnackRecord) {
   forVote = loaderOf(this).owning(VoteRecord, "snackId");
   byName = loaderOf(this).findOneBy("name");
+  // async findWithTagsNamed(names: string[]): Promise<Snack[]> {
+  //   const allSnacks = await this.table().select("*");
+  //   console.log("all snacks ", allSnacks);
+
+  //   console.log("Names: ", names);
+
+  //   const matchedTags = await this.table().innerJoin(
+  //     "taggings",
+  //     "taggings.snackId",
+  //     "=",
+  //     "snacks.id"
+  //   );
+
+  //   console.log("matchedTags ", matchedTags);
+
+  //   return [];
+  // }
+
+  async findWithTagsNamed(tagNames: string[]): Promise<SavedSnack[]> {
+    let query = this.table().select(this.db.raw(`"snacks".*`));
+
+    for (let i = 0; i < tagNames.length; i++) {
+      const tag = tagNames[i];
+
+      const taggingsN = `taggings${i}`;
+      const tagsN = `tag${i}`;
+
+      query = query.joinRaw(
+        `
+          INNER JOIN taggings ${taggingsN} ON ${taggingsN}."snackId" = "snacks".id
+          INNER JOIN tags ${tagsN} on
+            ${taggingsN}."tagId" = ${tagsN}.id
+            AND ${tagsN}.name = ?
+        `,
+        tag
+      );
+    }
+    return await query;
+  }
 }

@@ -19,9 +19,27 @@ const TAGS = ["delish", "Gluten-free", "Vegan", "yummy"];
 
 export const SnackReportUI: React.SFC<SnackReportUIProps> = props => {
   if (props.rows === null) {
-    return <div className="snack-report">Loading...</div>;
+    return (
+      <div>
+        <TagPicker
+          tags={TAGS}
+          selected={props.selectedTags}
+          onTagChange={props.onTagChange}
+        />
+        <div className="snack-report">Loading...</div>
+      </div>
+    );
   } else if (props.rows.length === 0) {
-    return <div className="snack-report">No snacks to show :(</div>;
+    return (
+      <div>
+        <TagPicker
+          tags={TAGS}
+          selected={props.selectedTags}
+          onTagChange={props.onTagChange}
+        />
+        <div className="snack-report">No snacks to show :(</div>
+      </div>
+    );
   } else {
     var rows = props.rows.map((row, i) => (
       <tr key={i}>
@@ -32,15 +50,15 @@ export const SnackReportUI: React.SFC<SnackReportUIProps> = props => {
       </tr>
     ));
   }
+
   return (
     <div className="snack-report">
-      <div className="oh-no">
-        <TagPicker
-          tags={TAGS}
-          selected={props.selectedTags}
-          onTagChange={props.onTagChange}
-        />
-      </div>
+      <TagPicker
+        tags={TAGS}
+        selected={props.selectedTags}
+        onTagChange={props.onTagChange}
+      />
+
       <table>
         <thead>
           <tr>

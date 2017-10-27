@@ -1,5 +1,6 @@
 import { withContext } from "__tests__/db-helpers";
 import { SnackReportQuery } from "client/graphql-types";
+import { TopSnacksQueryArgs } from "graphql-api/schema-types";
 
 describe("Dashboard snack query", () => {
   it(
@@ -66,6 +67,46 @@ describe("Dashboard snack query", () => {
 
       snackResult = result.data.topSnacks[1];
 
+      expect(snackResult.id).toEqual(snack2.id);
+      expect(snackResult.name).toEqual("cheese");
+      expect(snackResult.tags.length).toEqual(1);
+      expect(snackResult.tags[0]).toEqual("wow so good");
+    })
+  );
+  it(
+    "Returns only snacks that match provided tag",
+    withContext(async context => {
+      const graphql = context.apolloClient;
+
+      const snack1 = await context.snackRepository.insert({ name: "Guac" });
+      const snack2 = await context.snackRepository.insert({ name: "cheese" });
+
+      const tag1 = await context.tagRepository.insert({ name: "wow so good" });
+      const tag2 = await context.tagRepository.insert({ name: "pretty good" });
+
+      await context.taggingRepository.insert({
+        tagId: tag1.id,
+        snackId: snack2.id
+      });
+      await context.taggingRepository.insert({
+        tagId: tag2.id,
+        snackId: snack1.id
+      });
+
+      const variables: TopSnacksQueryArgs = {
+        tags: ["wow so good"]
+      };
+
+      const result = await graphql.query<SnackReportQuery>({
+        query: require("../SnackReport.graphql"),
+        variables: variables
+      });
+
+      if (!result.data || !result.data.topSnacks) throw "no snacks came back!";
+
+      expect(result.data.topSnacks.length).toEqual(1);
+
+      var snackResult = result.data.topSnacks[0];
       expect(snackResult.id).toEqual(snack2.id);
       expect(snackResult.name).toEqual("cheese");
       expect(snackResult.tags.length).toEqual(1);

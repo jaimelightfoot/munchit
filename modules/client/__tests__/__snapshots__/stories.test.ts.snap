@@ -116,6 +116,100 @@ exports[`Storyshots Component – SnackVoter No votes 1`] = `
 </ul>
 `;
 
+exports[`Storyshots Component – Tag Picker Basic example, none selected 1`] = `
+<div
+  className="tag-picker"
+>
+  <div
+    className="tag-picker-title"
+  >
+    <h1>
+      ✨ Tag Picker ✨
+    </h1>
+  </div>
+  <ul>
+    <li>
+      <label>
+        <input
+          checked={false}
+          onChange={[Function]}
+          type="checkbox"
+        />
+        one
+      </label>
+    </li>
+    <li>
+      <label>
+        <input
+          checked={false}
+          onChange={[Function]}
+          type="checkbox"
+        />
+        two
+      </label>
+    </li>
+    <li>
+      <label>
+        <input
+          checked={false}
+          onChange={[Function]}
+          type="checkbox"
+        />
+        three
+      </label>
+    </li>
+  </ul>
+</div>
+`;
+
+exports[`Storyshots Component – Tag Picker Basic example, one selected 1`] = `
+<div
+  className="tag-picker"
+>
+  <div
+    className="tag-picker-title"
+  >
+    <h1>
+      ✨ Tag Picker ✨
+    </h1>
+  </div>
+  <ul>
+    <li>
+      <label>
+        <input
+          checked={true}
+          onChange={[Function]}
+          type="checkbox"
+        />
+        one
+      </label>
+    </li>
+    <li>
+      <label>
+        <input
+          checked={false}
+          onChange={[Function]}
+          type="checkbox"
+        />
+        two
+      </label>
+    </li>
+    <li>
+      <label>
+        <input
+          checked={false}
+          onChange={[Function]}
+          type="checkbox"
+        />
+        three
+      </label>
+    </li>
+  </ul>
+</div>
+`;
+
+exports[`Storyshots Component – Tag Picker Empty example 1`] = `null`;
+
 exports[`Storyshots Page – Add Snack Simple example 1`] = `
 <div
   className="add-snack-page"
@@ -285,18 +379,128 @@ exports[`Storyshots Page – Home Percentage 1`] = `
 `;
 
 exports[`Storyshots Page – Snack Report Empty table example 1`] = `
-<div
-  className="snack-report"
->
-  No snacks to show :(
+<div>
+  <div
+    className="tag-picker"
+  >
+    <div
+      className="tag-picker-title"
+    >
+      <h1>
+        ✨ Tag Picker ✨
+      </h1>
+    </div>
+    <ul>
+      <li>
+        <label>
+          <input
+            checked={false}
+            onChange={[Function]}
+            type="checkbox"
+          />
+          delish
+        </label>
+      </li>
+      <li>
+        <label>
+          <input
+            checked={false}
+            onChange={[Function]}
+            type="checkbox"
+          />
+          Gluten-free
+        </label>
+      </li>
+      <li>
+        <label>
+          <input
+            checked={false}
+            onChange={[Function]}
+            type="checkbox"
+          />
+          Vegan
+        </label>
+      </li>
+      <li>
+        <label>
+          <input
+            checked={false}
+            onChange={[Function]}
+            type="checkbox"
+          />
+          yummy
+        </label>
+      </li>
+    </ul>
+  </div>
+  <div
+    className="snack-report"
+  >
+    No snacks to show :(
+  </div>
 </div>
 `;
 
 exports[`Storyshots Page – Snack Report Loading state 1`] = `
-<div
-  className="snack-report"
->
-  Loading...
+<div>
+  <div
+    className="tag-picker"
+  >
+    <div
+      className="tag-picker-title"
+    >
+      <h1>
+        ✨ Tag Picker ✨
+      </h1>
+    </div>
+    <ul>
+      <li>
+        <label>
+          <input
+            checked={false}
+            onChange={[Function]}
+            type="checkbox"
+          />
+          delish
+        </label>
+      </li>
+      <li>
+        <label>
+          <input
+            checked={false}
+            onChange={[Function]}
+            type="checkbox"
+          />
+          Gluten-free
+        </label>
+      </li>
+      <li>
+        <label>
+          <input
+            checked={false}
+            onChange={[Function]}
+            type="checkbox"
+          />
+          Vegan
+        </label>
+      </li>
+      <li>
+        <label>
+          <input
+            checked={false}
+            onChange={[Function]}
+            type="checkbox"
+          />
+          yummy
+        </label>
+      </li>
+    </ul>
+  </div>
+  <div
+    className="snack-report"
+  >
+    Loading...
+  </div>
 </div>
 `;
 
@@ -304,6 +508,59 @@ exports[`Storyshots Page – Snack Report Two rows example 1`] = `
 <div
   className="snack-report"
 >
+  <div
+    className="tag-picker"
+  >
+    <div
+      className="tag-picker-title"
+    >
+      <h1>
+        ✨ Tag Picker ✨
+      </h1>
+    </div>
+    <ul>
+      <li>
+        <label>
+          <input
+            checked={false}
+            onChange={[Function]}
+            type="checkbox"
+          />
+          delish
+        </label>
+      </li>
+      <li>
+        <label>
+          <input
+            checked={false}
+            onChange={[Function]}
+            type="checkbox"
+          />
+          Gluten-free
+        </label>
+      </li>
+      <li>
+        <label>
+          <input
+            checked={true}
+            onChange={[Function]}
+            type="checkbox"
+          />
+          Vegan
+        </label>
+      </li>
+      <li>
+        <label>
+          <input
+            checked={false}
+            onChange={[Function]}
+            type="checkbox"
+          />
+          yummy
+        </label>
+      </li>
+    </ul>
+  </div>
   <table>
     <thead>
       <tr>
