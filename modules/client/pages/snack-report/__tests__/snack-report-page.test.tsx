@@ -94,6 +94,6 @@ describe("Snack report page", () => {
       .find("input[checked=true]")
       .map(n => n.closest("label").text())
       .sort();
-    expect(selectedTags).toContain("delish");
+    expect(selectedTags).toContain("Vegan");
   });
 });
