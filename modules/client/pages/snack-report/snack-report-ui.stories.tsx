@@ -3,8 +3,12 @@ import * as React from "react";
 import { SnackReportUI } from "./snack-report-ui";
 
 storiesOf("Page – Snack Report", module)
-  .add("Empty table example", () => <SnackReportUI rows={[]} />)
-  .add("Loading state", () => <SnackReportUI rows={null} />)
+  .add("Empty table example", () => (
+    <SnackReportUI rows={[]} selectedTags={[]} onTagChange={() => {}} />
+  ))
+  .add("Loading state", () => (
+    <SnackReportUI rows={null} selectedTags={[]} onTagChange={() => {}} />
+  ))
   .add("Two rows example", () => (
     <SnackReportUI
       rows={[
@@ -21,5 +25,7 @@ storiesOf("Page – Snack Report", module)
           tags: ["Gluten-free", "Vegan"]
         }
       ]}
+      selectedTags={["Vegan"]}
+      onTagChange={() => {}}
     />
   ));

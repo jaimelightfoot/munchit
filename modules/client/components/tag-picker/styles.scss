@@ -1,0 +1,26 @@
+@import "client/styles/_core";
+
+.tag-picker {
+  background-color: rgb(196, 149, 196);
+  border: 2px solid rgb(67, 0, 67);
+  width: 300px;
+  color: rgb(69, 69, 69);
+  font-family: "Catamaran", sans-serif;
+
+  &-title {
+    text-align: center;
+    margin-top: 10px;
+  }
+
+  h1 {
+    font-weight: normal;
+  }
+
+  ul {
+    margin: 10px;
+  }
+
+  label {
+    font-weight: lighter;
+  }
+}

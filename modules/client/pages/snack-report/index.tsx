@@ -26,9 +26,17 @@ const wireToApollo = graphql<
 >(require("client/graphql-queries/SnackReport.graphql"), {
   props(result): SnackReportUIProps {
     if (!result.data || result.data.loading) {
-      return { rows: null };
+      return {
+        rows: null,
+        selectedTags: [],
+        onTagChange: () => {}
+      };
     } else {
-      return { rows: dataToRows(result.data) };
+      return {
+        rows: dataToRows(result.data),
+        selectedTags: ["delish"],
+        onTagChange: () => {}
+      };
     }
   }
 });

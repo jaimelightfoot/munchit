@@ -14,11 +14,19 @@ export const SnackResolvers = {
     return record && record.name;
   },
 
-  async voteCount(snack: MinimalSnack, args: {}, context: Context) {
+  async voteCount(
+    snack: MinimalSnack,
+    args: {},
+    context: Context
+  ): Promise<Snack["voteCount"]> {
     return await context.voteRepository.countForSnack.load(snack.id);
   },
 
-  async tags(snack: MinimalSnack, args: {}, context: Context) {
+  async tags(
+    snack: MinimalSnack,
+    args: {},
+    context: Context
+  ): Promise<Snack["tags"]> {
     const taggings = await context.taggingRepository.forSnack.load(snack.id);
     const tags = await context.tagRepository.forTagging.loadMany(taggings);
 

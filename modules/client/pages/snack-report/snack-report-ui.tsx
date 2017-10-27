@@ -1,4 +1,6 @@
 import * as React from "react";
+import * as TagSet from "core/tag-set";
+import { TagPicker } from "client/components/tag-picker";
 
 export interface SnackReportRow {
   place: number;
@@ -9,8 +11,11 @@ export interface SnackReportRow {
 
 export interface SnackReportUIProps {
   rows: SnackReportRow[] | null;
-  // more to come
+  selectedTags: TagSet.Type;
+  onTagChange: (tag: string, value: boolean) => void;
 }
+
+const TAGS = ["delish", "gf", "yummy"];
 
 export const SnackReportUI: React.SFC<SnackReportUIProps> = props => {
   if (props.rows === null) {
@@ -29,6 +34,9 @@ export const SnackReportUI: React.SFC<SnackReportUIProps> = props => {
   }
   return (
     <div className="snack-report">
+      <div className="oh-no">
+        <TagPicker tags={TAGS} selected={["delish"]} onTagChange={() => {}} />
+      </div>
       <table>
         <thead>
           <tr>
@@ -39,37 +47,6 @@ export const SnackReportUI: React.SFC<SnackReportUIProps> = props => {
           </tr>
         </thead>
         <tbody>{rows}</tbody>
-      </table>
-    </div>
-  );
-};
-
-export const SnackRseportUI: React.SFC = props => {
-  return (
-    <div className="snack-report">
-      <table>
-        <thead>
-          <tr>
-            <th>Place</th>
-            <th>Votes</th>
-            <th>Snack</th>
-            <th>Tags</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>1.</td>
-            <td>8</td>
-            <td>Cheese snack</td>
-            <td />
-          </tr>
-          <tr>
-            <td>2.</td>
-            <td>7</td>
-            <td>Guacamole</td>
-            <td>Gluten-free, Vegan</td>
-          </tr>
-        </tbody>
       </table>
     </div>
   );
