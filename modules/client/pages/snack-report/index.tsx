@@ -5,6 +5,33 @@ import {
 } from "client/pages/snack-report/snack-report-ui";
 import { SnackReportQuery } from "client/graphql-types";
 import { graphql } from "react-apollo";
+import { AssertAssignable } from "helpers";
+import * as State from "client/state/index";
+import { Dispatch, connect } from "react-redux";
+
+type StateProps = Pick<SnackReportUIProps, "selectedTags">;
+type DispatchProps = Pick<SnackReportUIProps, "onTagChange">;
+type ReduxConnectedProps = StateProps & DispatchProps;
+type GraphQLProps = Pick<SnackReportUIProps, "rows">;
+
+type _check = AssertAssignable<
+  SnackReportUIProps,
+  ReduxConnectedProps & GraphQLProps
+>;
+
+//  It should type check and utilize state.selectedTags.
+
+function mapStateToProps(state: State.Type): StateProps {
+  return {
+    selectedTags: state.selectedTags
+  };
+}
+
+function mapDispatchToProps(dispatch: Dispatch<any>): DispatchProps {
+  return {
+    onTagChange: (tag, value) => {}
+  };
+}
 
 export function dataToRows(data: SnackReportQuery): SnackReportRow[] {
   if (!data.topSnacks) {
@@ -21,24 +48,21 @@ export function dataToRows(data: SnackReportQuery): SnackReportRow[] {
 
 const wireToApollo = graphql<
   SnackReportQuery,
-  {},
+  ReduxConnectedProps,
   SnackReportUIProps
 >(require("client/graphql-queries/SnackReport.graphql"), {
-  props(result): SnackReportUIProps {
+  props(result): GraphQLProps {
     if (!result.data || result.data.loading) {
       return {
-        rows: null,
-        selectedTags: [],
-        onTagChange: () => {}
+        rows: null
       };
     } else {
       return {
-        rows: dataToRows(result.data),
-        selectedTags: ["delish"],
-        onTagChange: () => {}
+        rows: dataToRows(result.data)
       };
     }
   }
 });
+const wireToRedux = connect(mapStateToProps, mapDispatchToProps);
 
-export const SnackReportPage = wireToApollo(SnackReportUI);
+export const SnackReportPage = wireToRedux(wireToApollo(SnackReportUI));

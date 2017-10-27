@@ -15,7 +15,7 @@ export interface SnackReportUIProps {
   onTagChange: (tag: string, value: boolean) => void;
 }
 
-const TAGS = ["delish", "gf", "yummy"];
+const TAGS = ["delish", "Gluten-free", "Vegan", "yummy"];
 
 export const SnackReportUI: React.SFC<SnackReportUIProps> = props => {
   if (props.rows === null) {
@@ -35,7 +35,11 @@ export const SnackReportUI: React.SFC<SnackReportUIProps> = props => {
   return (
     <div className="snack-report">
       <div className="oh-no">
-        <TagPicker tags={TAGS} selected={["delish"]} onTagChange={() => {}} />
+        <TagPicker
+          tags={TAGS}
+          selected={props.selectedTags}
+          onTagChange={() => {}}
+        />
       </div>
       <table>
         <thead>
