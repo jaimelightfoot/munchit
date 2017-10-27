@@ -1,7 +1,6 @@
 import { storiesOf } from "@storybook/react";
 import * as React from "react";
 import { TagPicker } from "client/components/tag-picker";
-import { action } from "@storybook/addon-actions";
 import * as TagSet from "core/tag-set";
 
 storiesOf("Component – Tag Picker", module)

@@ -109,10 +109,12 @@ describe("Snack report page", () => {
 
     // check checkbox for delish
     checkboxFor("delish").simulate("change");
+    await sleep(0);
     expect(selectedTags()).toEqual(["Vegan", "delish"]);
 
     // uncheck
     checkboxFor("delish").simulate("change");
+    await sleep(0);
     expect(selectedTags()).toEqual(["Vegan"]);
   });
 });

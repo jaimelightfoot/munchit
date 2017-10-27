@@ -3,7 +3,10 @@ import {
   SnackReportUIProps,
   SnackReportRow
 } from "client/pages/snack-report/snack-report-ui";
-import { SnackReportQuery } from "client/graphql-types";
+import {
+  SnackReportQuery,
+  SnackReportQueryVariables
+} from "client/graphql-types";
 import { graphql } from "react-apollo";
 import { AssertAssignable } from "helpers";
 import * as State from "client/state/index";
@@ -54,6 +57,12 @@ const wireToApollo = graphql<
   ReduxConnectedProps,
   SnackReportUIProps
 >(require("client/graphql-queries/SnackReport.graphql"), {
+  options(props) {
+    const variables: SnackReportQueryVariables = {
+      tags: props.selectedTags
+    };
+    return { variables };
+  },
   props(result): GraphQLProps {
     if (!result.data || result.data.loading) {
       return {
