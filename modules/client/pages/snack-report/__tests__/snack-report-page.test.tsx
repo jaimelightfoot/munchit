@@ -65,4 +65,35 @@ describe("Snack report page", () => {
     expect(page.text()).toContain("koala");
     expect(page.text()).toContain("nostalgia");
   });
+  it("checks dem checked tags", async () => {
+    const Provider = mockProvider({
+      mocks: {
+        Query: () => ({
+          topSnacks: () => [
+            { id: 1, name: "Kiwis", voteCount: 1, tags: [] },
+            {
+              id: 2,
+              name: "Those cool koala things",
+              voteCount: 2,
+              tags: ["nostalgia"]
+            }
+          ]
+        })
+      }
+    });
+
+    const page = mount(
+      <Provider>
+        <SnackReportPage />
+      </Provider>
+    );
+
+    await sleep(0);
+
+    const selectedTags = page
+      .find("input[checked=true]")
+      .map(n => n.closest("label").text())
+      .sort();
+    expect(selectedTags).toContain("delish");
+  });
 });
