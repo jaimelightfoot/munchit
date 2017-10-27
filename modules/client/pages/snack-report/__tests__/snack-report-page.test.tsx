@@ -5,6 +5,8 @@ import { SnackReportPage } from "client/pages/snack-report";
 import { sleep } from "helpers";
 import * as State from "client/state";
 import * as TagSet from "core/tag-set";
+import { TopSnacksQueryArgs } from "graphql-api/schema-types";
+import { isEqual } from "lodash";
 
 describe("Snack report page", () => {
   it("Begins in a loading state", () => {
@@ -72,15 +74,19 @@ describe("Snack report page", () => {
       initState: State.selectedTags.comp(TagSet.tagValue("Vegan")).set(true),
       mocks: {
         Query: () => ({
-          topSnacks: () => [
-            { id: 1, name: "Kiwis", voteCount: 1, tags: [] },
-            {
-              id: 2,
-              name: "Those cool koala things",
-              voteCount: 2,
-              tags: ["nostalgia"]
+          topSnacks: (ignored: any, args: TopSnacksQueryArgs) => {
+            if (isEqual(args.tags, ["Vegan"])) {
+              return [{ id: 1, name: "Kiwis", voteCount: 1, tags: ["Vegan"] }];
             }
-          ]
+            return [
+              {
+                id: 2,
+                name: "Those coolkoala things",
+                voteCount: 2,
+                tags: ["nostalgia"]
+              }
+            ];
+          }
         })
       }
     });
@@ -106,6 +112,7 @@ describe("Snack report page", () => {
     await sleep(0);
 
     expect(selectedTags()).toEqual(["Vegan"]);
+    expect(page.text()).toContain("Kiwis");
 
     // check checkbox for delish
     checkboxFor("delish").simulate("change");
