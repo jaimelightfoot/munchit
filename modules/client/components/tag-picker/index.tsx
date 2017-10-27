@@ -11,7 +11,6 @@ export interface TagPickerProps {
 
 export const TagPicker: React.SFC<TagPickerProps> = props => {
   if (props.tags.length === 0) {
-    console.log("no tags");
     return null;
   }
 

@@ -2,6 +2,7 @@ import { rootReducer } from "client/reducers";
 import * as State from "client/state";
 import * as Actions from "client/actions";
 import { PopularityMode } from "client/state";
+import * as TagSet from "core/tag-set";
 
 describe("the app root reducer", () => {
   it("can set the popularity", () => {
@@ -20,5 +21,16 @@ describe("the app root reducer", () => {
       Actions.setPopularity(PM.PERCENTAGE)
     );
     expect(State.popularityMode(percentageState)).toEqual(PM.PERCENTAGE);
+  });
+  it("can toggle a checkbox", () => {
+    var state = State.DEFAULT;
+
+    expect(TagSet.has(state.selectedTags, "lil snack")).toBe(false);
+
+    state = rootReducer(state, Actions.changeTag("lil snack", true));
+    expect(TagSet.has(state.selectedTags, "lil snack")).toBe(true);
+
+    state = rootReducer(state, Actions.changeTag("lil snack", false));
+    expect(TagSet.has(state.selectedTags, "lil snack")).toBe(false);
   });
 });

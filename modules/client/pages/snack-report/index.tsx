@@ -8,6 +8,7 @@ import { graphql } from "react-apollo";
 import { AssertAssignable } from "helpers";
 import * as State from "client/state/index";
 import { Dispatch, connect } from "react-redux";
+import * as Actions from "client/actions";
 
 type StateProps = Pick<SnackReportUIProps, "selectedTags">;
 type DispatchProps = Pick<SnackReportUIProps, "onTagChange">;
@@ -29,7 +30,9 @@ function mapStateToProps(state: State.Type): StateProps {
 
 function mapDispatchToProps(dispatch: Dispatch<any>): DispatchProps {
   return {
-    onTagChange: (tag, value) => {}
+    onTagChange: (tag, value) => {
+      dispatch(Actions.changeTag(tag, value));
+    }
   };
 }
 

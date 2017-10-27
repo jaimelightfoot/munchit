@@ -3,6 +3,8 @@ import { mount } from "enzyme";
 import * as React from "react";
 import { SnackReportPage } from "client/pages/snack-report";
 import { sleep } from "helpers";
+import * as State from "client/state";
+import * as TagSet from "core/tag-set";
 
 describe("Snack report page", () => {
   it("Begins in a loading state", () => {
@@ -67,6 +69,7 @@ describe("Snack report page", () => {
   });
   it("checks dem checked tags", async () => {
     const Provider = mockProvider({
+      initState: State.selectedTags.comp(TagSet.tagValue("Vegan")).set(true),
       mocks: {
         Query: () => ({
           topSnacks: () => [
@@ -88,12 +91,28 @@ describe("Snack report page", () => {
       </Provider>
     );
 
+    const selectedTags = () =>
+      page
+        .find("input[checked=true]")
+        .map(n => n.closest("label").text())
+        .sort();
+
+    const checkboxFor = (tag: string) =>
+      page
+        .find("label")
+        .filterWhere(l => l.text().includes(tag))
+        .find("input");
+
     await sleep(0);
 
-    const selectedTags = page
-      .find("input[checked=true]")
-      .map(n => n.closest("label").text())
-      .sort();
-    expect(selectedTags).toContain("Vegan");
+    expect(selectedTags()).toEqual(["Vegan"]);
+
+    // check checkbox for delish
+    checkboxFor("delish").simulate("change");
+    expect(selectedTags()).toEqual(["Vegan", "delish"]);
+
+    // uncheck
+    checkboxFor("delish").simulate("change");
+    expect(selectedTags()).toEqual(["Vegan"]);
   });
 });

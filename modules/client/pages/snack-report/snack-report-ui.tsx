@@ -38,7 +38,7 @@ export const SnackReportUI: React.SFC<SnackReportUIProps> = props => {
         <TagPicker
           tags={TAGS}
           selected={props.selectedTags}
-          onTagChange={() => {}}
+          onTagChange={props.onTagChange}
         />
       </div>
       <table>
